@@ -11,11 +11,14 @@ npm install ampersand-collection-pouchdb-mixin
 ```javascript
 
 var _ = require('underscore');
-var AmpersandCollection = require('ampersand-collection');
+
 var AmpersandModel = require('ampersand-model');
 var AmpersandPouchModelMixin = require('ampersand-model-pouchdb-mixin');
-var AmpersandPouchCollectionMixin = require('ampersand-collection-pouchdb-mixin');
+
+var AmpersandCollection = require('ampersand-collection');
 var AmpersandUnderscoreMixin = require('ampersand-collection-underscore-mixin');
+var AmpersandCollectionRestMixin = require('ampersand-collection-rest-mixin');
+var AmpersandPouchCollectionMixin = require('ampersand-collection-pouchdb-mixin');
 
 var Model = AmpersandModel.extend(AmpersandPouchModelMixin, {
   pouch: {
@@ -27,36 +30,39 @@ var Model = AmpersandModel.extend(AmpersandPouchModelMixin, {
   }
 });
 
-module.exports = AmpersandCollection.extend(AmpersandPouchCollectionMixin, AmpersandUnderscoreMixin, {
-  mainIndex: '_id',
-  model: Model,
-  pouch: {
-    database: 'mydb',
-    fetch: 'query',
-    options: {
-      query: {
-        include_docs: true,
-        fun: {
-          map: function(doc) {
-            if (doc) {
-              emit(doc, null);
+module.exports = AmpersandCollection.extend(
+  AmpersandPouchCollectionMixin,
+  AmpersandCollectionRestMixin,
+  AmpersandUnderscoreMixin, {
+    mainIndex: '_id',
+    model: Model,
+    pouch: {
+      database: 'mydb',
+      fetch: 'query',
+      options: {
+        query: {
+          include_docs: true,
+          fun: {
+            map: function(doc) {
+              if (doc) {
+                emit(doc, null);
+              }
             }
-          }
+          },
+          limit: 10
         },
-        limit: 10
-      },
-      changes: {
-        include_docs: true,
-        filter: function(doc) {
-          return doc;
+        changes: {
+          include_docs: true,
+          filter: function(doc) {
+            return doc;
+          }
         }
       }
+    },
+    parse: function(result) {
+      // only return actual docs
+      return _.pluck(result.rows, 'doc');
     }
-  },
-  parse: function(result) {
-    // only return actual docs
-    return _.pluck(result.rows, 'doc');
-  }
 });
 
 ```

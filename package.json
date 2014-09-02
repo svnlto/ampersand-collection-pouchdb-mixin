@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "ampersand-collection": "^1.3.13",
+    "ampersand-collection-rest-mixin": "^3.0.0",
     "ampersand-collection-underscore-mixin": "^1.0.1",
     "ampersand-model": "^4.0.1",
     "ampersand-model-pouchdb-mixin": "^0.1.0",
