@@ -69,6 +69,15 @@ test('collection should have a mainIndex of \'_id\'', function (t) {
   t.end();
 });
 
+test('existance of rest mixin methods', function (t) {
+  var c = new Collection();
+  t.ok(c.create, 'has create method');
+  t.ok(c.fetch, 'has fetch method');
+  t.ok(c.getOrFetch, 'has fetch method');
+  t.ok(c.fetchById, 'has fetch method');
+  t.end();
+});
+
 test('existance of underscore methods', function (t) {
   var c = new Collection();
   t.ok(c.find, 'has find method');
