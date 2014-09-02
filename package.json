@@ -15,7 +15,6 @@
     "ampersand-model": "^4.0.1",
     "browserify": "^5.9.3",
     "jshint": "^2.5.3",
-    "precommit-hook": "^1.0.7",
     "run-browser": "~1.3.0",
     "tap-spec": "^0.2.0",
     "tape": "^2.14.0",
@@ -35,11 +34,11 @@
     "url": "https://github.com/svnlto/ampersand-collection-pouchdb-mixin.git"
   },
   "scripts": {
-    "start": "run-browser test/*",
+    "start": "run-browser test/index.js",
     "test": "browserify test/* | tape-run | tap-spec"
   },
   "testling": {
-    "files": "test/*.js",
+    "files": "test/index.js",
     "browsers": [
       "ie/8..latest",
       "firefox/17..latest",
