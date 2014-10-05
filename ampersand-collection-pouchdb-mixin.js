@@ -1,5 +1,4 @@
 var pouchSync = require('ampersand-pouchdb-sync');
-var extend = require('extend-object');
 
 module.exports = {
 
