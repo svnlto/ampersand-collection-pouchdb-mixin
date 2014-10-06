@@ -7,7 +7,6 @@
     "url": "https://github.com/svnlto/ampersand-collection-pouchdb-mixin/issues"
   },
   "dependencies": {
-    "extend-object": "^1.0.0",
     "ampersand-pouchdb-sync": "^0.1.0"
   },
   "devDependencies": {
